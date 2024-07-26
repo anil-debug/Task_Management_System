@@ -5,7 +5,7 @@ from services.db_interaction import PostgreSQLInteraction
 # Initialize PostgreSQL interaction
 try:
     PostgreSQL = PostgreSQLInteraction(
-        dbname='task_db',
+        dbname='postgres',
         user='postgres',
         password='mysecretpassword',
         host='postgres',  # Use Docker service name
