@@ -88,3 +88,22 @@ def get_tasks(user_id):
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     return jsonify({'error': 'Database connection failed'}), 500
+
+@app.route('/tasks/<int:task_id>', methods=['PATCH'])
+def update_task_status(task_id):
+    data = request.get_json()
+    new_status = data.get('status')
+    
+    if PostgreSQL:
+        try:
+            query = "UPDATE tasks SET status = %s WHERE id = %s;"
+            PostgreSQL.cur.execute(query, (new_status, task_id))
+            PostgreSQL.conn.commit()
+            if PostgreSQL.cur.rowcount > 0:
+                return jsonify({'message': 'Task status updated successfully'}), 200
+            else:
+                return jsonify({'error': 'Task not found'}), 404
+        except Exception as e:
+            PostgreSQL.conn.rollback()
+            return jsonify({'error': str(e)}), 500
+    return jsonify({'error': 'Database connection failed'}), 500
