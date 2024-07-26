@@ -1,0 +1,23 @@
+# Use a base image with Python installed
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the frontend-specific requirements file
+COPY frontend/requirements.txt /app/
+
+# Install frontend-specific dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the frontend-specific files
+COPY frontend/ /app/frontend/
+
+# Set the working directory to the frontend folder
+WORKDIR /app/frontend
+
+# Expose the Streamlit port
+EXPOSE 8501
+
+# Run the Streamlit app
+CMD ["streamlit", "run", "app.py"]

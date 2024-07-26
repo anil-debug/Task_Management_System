@@ -1,0 +1,23 @@
+# Use a base image with Python installed
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the backend-specific requirements file
+COPY backend/requirements.txt /app/
+
+# Install backend-specific dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the backend-specific files
+COPY backend/ /app/backend/
+
+# Set the working directory to the backend folder
+WORKDIR /app/backend
+
+# Expose the Flask port
+EXPOSE 5000
+
+# Run the Flask app
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

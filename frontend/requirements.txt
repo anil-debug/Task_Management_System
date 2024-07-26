@@ -1,0 +1,2 @@
+streamlit==1.27.2
+requests==2.28  # Include only if required for the frontend
