@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     async createUser() {
-      const backendUrl = process.env.VUE_APP_BACKEND_URL;
+      const backendUrl = process.env.VUE_APP_BACKEND_URL || 'http://backend:5000'
+      console.log(`Backend URL: ${backendUrl}`);
       console.log(`Backend URL: ${backendUrl}`);
       console.log(`Attempting to create user with username: ${this.username} and email: ${this.email}`);
       try {

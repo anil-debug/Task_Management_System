@@ -7,6 +7,8 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     ports:
       - "5432:5432"
+    networks:
+      - my_network
 
   backend:
     build:
@@ -19,6 +21,8 @@ services:
     environment:
       - FLASK_ENV=development
       - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/task_db
+    networks:
+      - my_network
 
   frontend:
     build:
@@ -30,3 +34,9 @@ services:
       - "8501:80"
     environment:
       - VUE_APP_BACKEND_URL=http://backend:5000
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
