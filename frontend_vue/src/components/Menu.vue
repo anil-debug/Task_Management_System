@@ -4,7 +4,7 @@
         <li @click="emitMenu('CreateUser')">Create User</li>
         <li @click="emitMenu('CreateTask')">Create Task</li>
         <li @click="emitMenu('ViewTasks')">View Tasks</li>
-        <li @click="emitMenu('UpdateTaskStatus')">Update Task Status</li>
+        <!-- <li @click="emitMenu('UpdateTaskStatus')">Update Task Status</li> -->
       </ul>
     </div>
   </template>

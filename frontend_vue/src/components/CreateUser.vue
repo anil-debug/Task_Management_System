@@ -22,17 +22,21 @@
     },
     methods: {
       async createUser() {
+        const backendUrl = process.env.VUE_APP_BACKEND_URL;
+        console.log(`Backend URL: ${backendUrl}`);
+        console.log(`Attempting to create user with username: ${this.username} and email: ${this.email}`);
         try {
-          const response = await axios.post('http://backend:5000/users', {
+          const response = await axios.post(`${backendUrl}/users`, {
             username: this.username,
             email: this.email
           });
+          console.log('Response:', response.data);
           if (response.status === 201) {
             this.message = 'User created successfully!';
           }
         } catch (error) {
+          console.error('Error creating user:', error.response ? error.response.data : error.message);
           this.message = 'Failed to create user.';
-          console.error(error);
         }
       }
     }
