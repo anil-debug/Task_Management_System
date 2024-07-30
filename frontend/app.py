@@ -9,14 +9,11 @@ BASE_URL = "http://backend:5000"
 class TaskManagementSystem:
     def __init__(self):
         # Ensure session state has a 'name' key
-        if 'name' not in st.session_state:
-            st.session_state['name'] = "User"
-
         self.menu = ["Home", "Create User", "Create Task", "View Tasks", "Update Task Status"]
-        self.menu_icon = ["house", "person", "plus", "list", "edit"]
+        self.menu_icon = ["house", "person", "plus", "list", "pencil"]
         
         with st.sidebar:
-            st.markdown(f"<h4 style='text-align: center;font-style: italic;'>Welcome {st.session_state['name']}</h4>", unsafe_allow_html=True)
+            # st.markdown(f"<h4 style='text-align: center;font-style: italic;'>Welcome {st.session_state['name']}</h4>", unsafe_allow_html=True)
             self.mode = option_menu(None, self.menu,
                                         icons=self.menu_icon,
                                         menu_icon="app-indicator", default_index=0,
